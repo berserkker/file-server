@@ -3,17 +3,15 @@ package com.app.fileserver.service;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import com.app.fileserver.dao.FileInfoMapper;
 import com.app.fileserver.entity.FileInfo;
 
 @Service
 public class FileInfoServiceImpl implements FileInfoService {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private FileInfoMapper fileInfoMapper;
 
     /**
      * 保存用户文件
@@ -24,9 +22,8 @@ public class FileInfoServiceImpl implements FileInfoService {
     @Override
     public String saveFile(FileInfo fileInfo) {
         String uuid = UUID.randomUUID().toString();
-        int count = jdbcTemplate.update("insert into fileinfo(name,size,type,path,suffix,uuid) values(?,?,?,?,?,?)",
-                fileInfo.getName(), fileInfo.getSize(), fileInfo.getType(),
-                fileInfo.getPath(), fileInfo.getSuffix(), uuid);
+        fileInfo.setUuid(uuid);
+        int count = fileInfoMapper.insertSelective(fileInfo);
         if (count > 0) {
             return uuid;
         }
@@ -40,7 +37,7 @@ public class FileInfoServiceImpl implements FileInfoService {
      */
     @Override
     public FileInfo getFileByUUID(String uuid) {
-        RowMapper<FileInfo> rowMapper = new BeanPropertyRowMapper<>(FileInfo.class);
-        return jdbcTemplate.queryForObject("select * from fileinfo where uuid = ?", rowMapper, uuid);
+        FileInfo fileInfo = fileInfoMapper.getFileByUUID(uuid);
+        return fileInfo;
     }
 }

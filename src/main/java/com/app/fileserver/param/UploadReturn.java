@@ -2,7 +2,7 @@ package com.app.fileserver.param;
 
 public class UploadReturn {
     private String msg;
-    private long size;
+    private double size;
     private String name;
     private String path;
     private String suffix;
@@ -20,14 +20,6 @@ public class UploadReturn {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public long getSize() {
-        return size;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
     }
 
     public String getName() {
@@ -52,5 +44,13 @@ public class UploadReturn {
 
     public void setSuffix(String suffix) {
         this.suffix = suffix;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
     }
 }

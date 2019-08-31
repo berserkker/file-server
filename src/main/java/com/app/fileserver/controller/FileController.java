@@ -81,6 +81,6 @@ public class FileController {
                 }
             }
         }
-        return "下载失败，未找到文件！";
+        return JSONObject.toJSONString(new ResultResponse(1, "not found this file！", null));
     }
 }
