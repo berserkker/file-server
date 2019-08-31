@@ -78,8 +78,12 @@ public class FileOperatorService {
         return null;
     }
 
-    public String downloadFile(String path, String name) {
-        return null;
+    /**
+     * 文件下载
+     */
+    public String downloadFile(String path) {
+        //TODO 暂时不需要到这一层
+        return "";
     }
 
     /**

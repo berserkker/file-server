@@ -3,7 +3,9 @@ package com.app.fileserver.service;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.app.fileserver.entity.FileInfo;
@@ -38,6 +40,7 @@ public class FileInfoServiceImpl implements FileInfoService {
      */
     @Override
     public FileInfo getFileByUUID(String uuid) {
-        return jdbcTemplate.queryForObject("select * from fileinfo where uuid = ?", FileInfo.class, uuid);
+        RowMapper<FileInfo> rowMapper = new BeanPropertyRowMapper<>(FileInfo.class);
+        return jdbcTemplate.queryForObject("select * from fileinfo where uuid = ?", rowMapper, uuid);
     }
 }

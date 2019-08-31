@@ -45,4 +45,15 @@ public class FileServiceImpl implements FileService {
         }
         return new UploadResponse("上传文件失败！", null);
     }
+
+    /**
+     * 根据uuid 获取文件信息
+     *
+     * @param uuid
+     * @return FileInfo 文件信息
+     */
+    @Override
+    public FileInfo getFileByUuid(String uuid) {
+        return fileInfoService.getFileByUUID(uuid);
+    }
 }

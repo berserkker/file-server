@@ -16,7 +16,9 @@ public class TokenInterceptorConfigure extends WebMvcConfigurationSupport {
         // 多个拦截器组成一个拦截器链
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
-        registry.addInterceptor(userTokenInterceptor).addPathPatterns("/**");
+        //下载文件不需要token
+        registry.addInterceptor(userTokenInterceptor).addPathPatterns("/**").
+                excludePathPatterns("/downloadFile/**");
         super.addInterceptors(registry);
     }
 }
