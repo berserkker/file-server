@@ -18,7 +18,7 @@ public class TokenInterceptorConfigure extends WebMvcConfigurationSupport {
         // excludePathPatterns 用户排除拦截
         //下载文件不需要token
         registry.addInterceptor(userTokenInterceptor).addPathPatterns("/**").
-                excludePathPatterns("/downloadFile/**");
+                excludePathPatterns("/downloadFile/**","/getFileStream/**");
         super.addInterceptors(registry);
     }
 }
